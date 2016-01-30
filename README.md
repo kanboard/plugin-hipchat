@@ -1,6 +1,8 @@
 Hipchat plugin for Kanboard
 ===========================
 
+[![Build Status](https://travis-ci.org/kanboard/plugin-hipchat.svg?branch=master)](https://travis-ci.org/kanboard/plugin-hipchat)
+
 Receive Kanboard notifications on Hipchat.
 
 Author
