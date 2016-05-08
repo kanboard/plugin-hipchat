@@ -6,7 +6,7 @@
     <?= $this->form->label(t('Room notification token'), 'hipchat_room_token') ?>
     <?= $this->form->text('hipchat_room_token', $values) ?>
 
-    <p class="form-help"><a href="https://github.com/kanboard/plugin-hipchat" target="_blank"><?= t('Help on Hipchat integration') ?></a></p>
+    <p class="form-help"><a href="https://kanboard.net/plugin/hipchat" target="_blank"><?= t('Help on Hipchat integration') ?></a></p>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue"/>
