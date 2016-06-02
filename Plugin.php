@@ -18,13 +18,13 @@ class Plugin extends Base
         $this->template->hook->attach('template:config:integrations', 'hipchat:config/integration');
         $this->template->hook->attach('template:project:integrations', 'hipchat:project/integration');
 
-        $this->userNotificationType->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
-        $this->projectNotificationType->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
+        $this->userNotificationTypeModel->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
+        $this->projectNotificationTypeModel->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
     }
 
     public function onStartup()
     {
-        Translator::load($this->language->getCurrentLanguage(), __DIR__.'/Locale');
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginDescription()
@@ -39,7 +39,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '1.0.4';
+        return '1.0.5';
     }
 
     public function getPluginHomepage()
