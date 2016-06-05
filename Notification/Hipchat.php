@@ -60,7 +60,7 @@ class Hipchat extends Base implements NotificationInterface
                 $token
             );
 
-            $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+            $this->httpClient->postJsonAsync($url, $this->getMessage($project, $event_name, $event_data));
         }
     }
 
