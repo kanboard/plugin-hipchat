@@ -1,5 +1,5 @@
 <h3><img src="<?= $this->url->dir() ?>plugins/Hipchat/hipchat-icon.png"/>&nbsp;Hipchat</h3>
-<div class="listing">
+<div class="panel">
     <?= $this->form->label(t('Room API ID or name'), 'hipchat_room_id') ?>
     <?= $this->form->text('hipchat_room_id', $values) ?>
 
