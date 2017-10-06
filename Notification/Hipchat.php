@@ -30,7 +30,7 @@ class Hipchat extends Base implements NotificationInterface
 
             $url = sprintf(
                 '%s/v2/user/%s/message?auth_token=%s',
-                $this->configModel->get('api_url', 'https://api.hipchat.com'),
+                $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'),
                 $user['email'],
                 $api_token
             );
@@ -55,7 +55,7 @@ class Hipchat extends Base implements NotificationInterface
         if (! empty($room_id) && ! empty($token)) {
             $url = sprintf(
                 '%s/v2/room/%s/notification?auth_token=%s',
-                $this->configModel->get('api_url', 'https://api.hipchat.com'),
+                $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'),
                 $room_id,
                 $token
             );
