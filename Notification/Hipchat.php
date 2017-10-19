@@ -4,6 +4,7 @@ namespace Kanboard\Plugin\Hipchat\Notification;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Notification\NotificationInterface;
+use Kanboard\Model\TaskModel;
 
 /**
  * Hipchat Notification
@@ -26,8 +27,6 @@ class Hipchat extends Base implements NotificationInterface
         $api_token = $this->configModel->get('hipchat_api_token');
 
         if (! empty($user['email']) && ! empty($api_token)) {
-            $project = $this->projectModel->getById($event_data['task']['project_id']);
-
             $url = sprintf(
                 '%s/v2/user/%s/message?auth_token=%s',
                 $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'),
@@ -35,7 +34,16 @@ class Hipchat extends Base implements NotificationInterface
                 $api_token
             );
 
-            $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+            if ($event_name === TaskModel::EVENT_OVERDUE) {
+                foreach ($event_data['tasks'] as $task) {
+                    $project = $this->projectModel->getById($task['project_id']);
+                    $eventData['task'] = $task;
+                    $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+                }
+            } else {
+                $project = $this->projectModel->getById($event_data['task']['project_id']);
+                $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+            }
         }
     }
 
@@ -71,7 +79,7 @@ class Hipchat extends Base implements NotificationInterface
      * @param  array     $project
      * @param  string    $event_name
      * @param  array     $event_data
-     * @return string
+     * @return array
      */
     public function getMessage(array $project, $event_name, array $event_data)
     {
