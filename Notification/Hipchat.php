@@ -37,12 +37,12 @@ class Hipchat extends Base implements NotificationInterface
             if ($event_name === TaskModel::EVENT_OVERDUE) {
                 foreach ($event_data['tasks'] as $task) {
                     $project = $this->projectModel->getById($task['project_id']);
-                    $eventData['task'] = $task;
-                    $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+                    $event_data['task'] = $task;
+                    $this->httpClient->postJsonAsync($url, $this->getMessage($project, $event_name, $event_data));
                 }
             } else {
                 $project = $this->projectModel->getById($event_data['task']['project_id']);
-                $this->httpClient->postJson($url, $this->getMessage($project, $event_name, $event_data));
+                $this->httpClient->postJsonAsync($url, $this->getMessage($project, $event_name, $event_data));
             }
         }
     }
