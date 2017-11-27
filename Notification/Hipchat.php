@@ -90,7 +90,7 @@ class Hipchat extends Base implements NotificationInterface
             $title = $this->notificationModel->getTitleWithoutAuthor($event_name, $event_data);
         }
 
-        $html = '<img src="https://kanboard.net/assets/img/favicon-32x32.png"/>';
+        $html = '<img src="https://raw.githubusercontent.com/kanboard/kanboard/master/assets/img/touch-icon-iphone-retina.png"/>';
         $html .= '<strong>'.$project['name'].'</strong><br/>'.$event_data['task']['title'].'<br/>';
         $html .= $title;
 
