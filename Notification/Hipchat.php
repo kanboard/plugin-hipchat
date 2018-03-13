@@ -9,7 +9,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Hipchat Notification
  *
- * @package  notification
+ * @package  Kanboard\Plugin\Hipchat\Notification
  * @author   Frederic Guillot
  */
 class Hipchat extends Base implements NotificationInterface
@@ -24,7 +24,7 @@ class Hipchat extends Base implements NotificationInterface
      */
     public function notifyUser(array $user, $event_name, array $event_data)
     {
-        $api_token = $this->configModel->get('hipchat_api_token');
+        $api_token = $this->userMetadataModel->get($user['id'], 'hipchat_api_token', $this->configModel->get('hipchat_api_token'));
 
         if (! empty($user['email']) && ! empty($api_token)) {
             $url = sprintf(
@@ -90,20 +90,19 @@ class Hipchat extends Base implements NotificationInterface
             $title = $this->notificationModel->getTitleWithoutAuthor($event_name, $event_data);
         }
 
-        $html = '<img src="https://raw.githubusercontent.com/kanboard/kanboard/master/assets/img/favicon.png"/>';
-        $html .= '<strong>'.$project['name'].'</strong><br/>'.$event_data['task']['title'].'<br/>';
-        $html .= $title;
+        $html = '<strong>'.$project['name'].'</strong> - '.$event_data['task']['title'].'<br><em>'.$title.'</em>';
 
         if ($this->configModel->get('application_url') !== '') {
             $html .= '<br/><a href="';
             $html .= $this->helper->url->to('TaskViewController', 'show', array('task_id' => $event_data['task']['id'], 'project_id' => $project['id']), '', true);
-            $html .= '">'.t('view the task on Kanboard').'</a>';
+            $html .= '">'.t('View the task').'</a>';
         }
 
         return array(
             'message' => $html,
             'color' => 'yellow',
             'message_format' => 'html',
+            'notify' => true,
         );
     }
 }

@@ -1,4 +1,4 @@
-Hipchat plugin for Kanboard
+Hipchat Plugin for Kanboard
 ===========================
 
 [![Build Status](https://travis-ci.org/kanboard/plugin-hipchat.svg?branch=master)](https://travis-ci.org/kanboard/plugin-hipchat)
@@ -33,17 +33,18 @@ Configuration
 
 ### Hipchat API Settings
 
-Firstly, you need to generate a new API token on Hipchat website, then configure Kanboard.
+Firstly, you need to generate a new API token on Hipchat, then configure Kanboard.
 
 Go to **Settings > Integrations > Hipchat** and fill the form:
 
 - **Hipchat API URL**: If you use the self-hosted version of Hipchat, define the API URL here
-- **Hipchat API Token**: Copy and paste the token generated from your Hipchat account
+- **Hipchat API Token**: This is the global API token, this is optional. It will be used globally for all users
 
 ### Receive individual user notifications
 
-- You must have the same email address between your Hipchat account and your Kanboard profile
+- Generate an Hipchat API token and copy and paste the token here: **Your user profile > Integrations > Hipchat API Token**
 - Then enable Hipchat notifications in your profile: **Notifications > Select Hipchat**
+- You must have the same email address between your Hipchat account and your Kanboard profile
 
 ### Receive project notifications to a room
 
@@ -51,7 +52,8 @@ Go to **Settings > Integrations > Hipchat** and fill the form:
 - **Room API ID or name**: Enter the Hipchat room name (case sensitive) or the API ID
 - **Room notification token**: Enter to room token or leave it blank to use the global API token
 
-## Troubleshooting
+Troubleshooting
+---------------
 
 - Enable the debug mode
-- All connection errors with the API are recorded in the log files `data/debug.log` or syslog
+- All connection errors with the API are recorded in the logs

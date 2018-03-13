@@ -8,7 +8,7 @@ use Kanboard\Core\Plugin\Base;
 /*
  * Hipchat Plugin
  *
- * @package  hipchat
+ * @package  Kanboard\Plugin\Hipchat
  * @author   Frederic Guillot
  */
 class Plugin extends Base
@@ -17,6 +17,7 @@ class Plugin extends Base
     {
         $this->template->hook->attach('template:config:integrations', 'hipchat:config/integration');
         $this->template->hook->attach('template:project:integrations', 'hipchat:project/integration');
+        $this->template->hook->attach('template:user:integrations', 'hipchat:user/integration');
 
         $this->userNotificationTypeModel->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
         $this->projectNotificationTypeModel->setType('hipchat', t('Hipchat'), '\Kanboard\Plugin\Hipchat\Notification\Hipchat');
@@ -39,7 +40,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '1.0.8';
+        return '1.0.9';
     }
 
     public function getPluginHomepage()
