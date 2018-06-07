@@ -25,11 +25,12 @@ class Hipchat extends Base implements NotificationInterface
     public function notifyUser(array $user, $event_name, array $event_data)
     {
         $api_token = $this->userMetadataModel->get($user['id'], 'hipchat_api_token', $this->configModel->get('hipchat_api_token'));
+        $api_url = $this->userMetadataModel->get($user['id'], 'hipchat_api_url', $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'));
 
         if (! empty($user['email']) && ! empty($api_token)) {
             $url = sprintf(
                 '%s/v2/user/%s/message?auth_token=%s',
-                $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'),
+                $api_url,
                 $user['email'],
                 $api_token
             );
@@ -59,11 +60,12 @@ class Hipchat extends Base implements NotificationInterface
     {
         $room_id = $this->projectMetadataModel->get($project['id'], 'hipchat_room_id');
         $token = $this->projectMetadataModel->get($project['id'], 'hipchat_room_token', $this->configModel->get('hipchat_api_token'));
+        $api_url = $this->projectMetadataModel->get($project['id'], 'hipchat_api_url', $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'));
 
         if (! empty($room_id) && ! empty($token)) {
             $url = sprintf(
                 '%s/v2/room/%s/notification?auth_token=%s',
-                $this->configModel->get('hipchat_api_url', 'https://api.hipchat.com'),
+                $api_url,
                 $room_id,
                 $token
             );
